@@ -91,6 +91,7 @@ React 19 escuta esses eventos no elemento. Em React 18, use `addEventListener` o
 ```bash
 pnpm install
 pnpm start          # galeria em http://localhost:3333
+pnpm storybook      # catálogo em http://localhost:6006
 pnpm test
 pnpm build          # dist/ + loader/
 ```

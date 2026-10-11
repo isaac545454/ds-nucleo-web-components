@@ -7,6 +7,10 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Added
+
+- Storybook 10 (`@storybook/web-components-vite`) com stories dos componentes, addon de acessibilidade e toggle de tema light/dark.
+
 ### Changed
 
 - O Nucleus passou a ser um design system de web components compilado com Stencil. Os mesmos tokens e componentes funcionam em HTML, React, Vue, Angular ou qualquer outro ambiente, sem dependência de framework.

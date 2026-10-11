@@ -20,6 +20,10 @@ export const config: Config = {
       type: 'www',
       serviceWorker: null,
     },
+    {
+      type: 'docs-json',
+      file: 'custom-elements.json',
+    },
   ],
   testing: {
     browserHeadless: 'shell',
