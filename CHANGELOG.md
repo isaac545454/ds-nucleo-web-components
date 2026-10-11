@@ -7,6 +7,8 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-11
+
 ### Changed
 
 - O Nucleus passou a ser um design system de web components compilado com Stencil. Os mesmos tokens e componentes funcionam em HTML, React, Vue, Angular ou qualquer outro ambiente, sem dependência de framework.
