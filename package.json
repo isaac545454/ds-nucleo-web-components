@@ -5,7 +5,7 @@
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/isaac545454/ds-nucleo-web-components.git"
+    "url": "https://github.com/isaac545454/ds-nucleo-web-components.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
