@@ -7,6 +7,10 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Fixed
+
+- A publicação no GitHub Packages usa acesso público. O pacote com escopo saía privado e o registry respondia `403 write_package`.
+
 ## [0.5.0] - 2026-10-11
 
 ### Added

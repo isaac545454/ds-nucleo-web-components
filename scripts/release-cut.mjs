@@ -91,9 +91,18 @@ function git(command) {
 }
 
 function commitMessages(version) {
+  const escaped = version.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   try {
     return git(`git log v${version}..HEAD --format=%s%n%b`);
   } catch {
+    try {
+      const releaseCommit = git(
+        `git log -1 --format=%H --grep=^chore: release v${escaped}$`
+      );
+      if (releaseCommit) return git(`git log ${releaseCommit}..HEAD --format=%s%n%b`);
+    } catch {
+      // Ainda não existe commit de release desta versão.
+    }
     return git("git log --format=%s%n%b");
   }
 }

@@ -25,6 +25,7 @@ jobs:
           node-version: 22
           cache: pnpm
           registry-url: https://npm.pkg.github.com
+          scope: '@isaac545454'
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
@@ -45,7 +46,6 @@ jobs:
           git push origin HEAD:master
 
       - name: Publicar pacote e criar GitHub Release
-        if: steps.cut.outputs.released == 'true'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -59,8 +59,8 @@ jobs:
             exit 0
           fi
 
-          if ! npm view "${name}@${version}" version --registry https://npm.pkg.github.com >/dev/null 2>&1; then
-            pnpm publish --no-git-checks
+          if ! npm view "${name}@${version}" version --registry https://npm.pkg.github.com; then
+            pnpm publish --no-git-checks --access public
           fi
 
           notes="$(node scripts/release-notes.mjs "$version")"
