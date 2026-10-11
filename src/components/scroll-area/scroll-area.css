@@ -1,0 +1,19 @@
+:host {
+  display: block;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  color: hsl(var(--foreground));
+}
+
+:host::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+:host::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: hsl(var(--border));
+  background-clip: padding-box;
+}

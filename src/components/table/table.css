@@ -1,0 +1,9 @@
+:host {
+  display: block;
+  width: 100%;
+  overflow: auto;
+}
+
+.wrap {
+  min-width: 100%;
+}

@@ -1,0 +1,233 @@
+<!doctype html>
+<html dir="ltr" lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nucleus</title>
+    <link rel="stylesheet" href="/build/nucleus.css" />
+    <script type="module" src="/build/nucleus.esm.js"></script>
+    <style>
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+        background: hsl(var(--background));
+        color: hsl(var(--foreground));
+      }
+      main {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 2rem 1.25rem 4rem;
+        display: grid;
+        gap: 2rem;
+      }
+      section {
+        display: grid;
+        gap: 0.75rem;
+        justify-items: start;
+      }
+      h1, h2 { margin: 0; letter-spacing: -0.03em; }
+      h2 { font-size: 1.125rem; }
+      .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+      form { display: grid; gap: 0.75rem; width: min(100%, 28rem); }
+      .stack { display: grid; gap: 0.5rem; }
+      #form-out, #slider-out { margin: 0; color: hsl(var(--muted-foreground)); font-size: 0.875rem; }
+      n-scroll-area { height: 8rem; border: 1px solid hsl(var(--border)); border-radius: var(--radius); padding: 0.75rem; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section>
+        <h1>Nucleus</h1>
+        <p>Web components agnósticos, compilados com Stencil.</p>
+        <n-button id="theme" variant="outline" size="sm">Tema escuro</n-button>
+      </section>
+
+      <section>
+        <h2>Button</h2>
+        <div class="row">
+          <n-button>Default</n-button>
+          <n-button variant="secondary">Secondary</n-button>
+          <n-button variant="outline">Outline</n-button>
+          <n-button variant="ghost">Ghost</n-button>
+          <n-button variant="destructive">Destructive</n-button>
+          <n-button variant="link">Link</n-button>
+          <n-button size="sm">Small</n-button>
+          <n-button size="lg">Large</n-button>
+          <n-button disabled>Disabled</n-button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Formulário</h2>
+        <form id="login">
+          <div class="stack">
+            <n-label for="email">E-mail</n-label>
+            <n-input id="email" name="email" type="email" required placeholder="voce@empresa.com"></n-input>
+          </div>
+          <div class="stack">
+            <n-label for="about">Sobre</n-label>
+            <n-textarea id="about" name="about" placeholder="Notas"></n-textarea>
+          </div>
+          <div class="row">
+            <n-checkbox id="news" name="news" value="yes"></n-checkbox>
+            <n-label for="news">Novidades</n-label>
+            <n-switch id="alerts" name="alerts"></n-switch>
+            <n-label for="alerts">Alertas</n-label>
+          </div>
+          <n-radio-group name="plan" value="pro">
+            <n-radio value="free">Free</n-radio>
+            <n-radio value="pro">Pro</n-radio>
+          </n-radio-group>
+          <div class="stack">
+            <n-label for="city">Cidade</n-label>
+            <n-select id="city" name="city" placeholder="Escolha">
+              <n-option-group label="Brasil">
+                <n-option value="sp">São Paulo</n-option>
+                <n-option value="rj">Rio de Janeiro</n-option>
+              </n-option-group>
+            </n-select>
+          </div>
+          <div class="stack">
+            <n-label for="volume">Volume</n-label>
+            <n-slider id="volume" name="volume" value="40"></n-slider>
+            <p id="slider-out">40</p>
+          </div>
+          <n-button type="submit">Enviar</n-button>
+        </form>
+        <p id="form-out"></p>
+        <n-toggle variant="outline">Negrito</n-toggle>
+      </section>
+
+      <section>
+        <h2>Overlays</h2>
+        <div class="row">
+          <n-dialog>
+            <n-button slot="trigger">Diálogo</n-button>
+            <span slot="title">Editar perfil</span>
+            <span slot="description">Esses dados aparecem no diretório.</span>
+            <n-input name="name" placeholder="Ada Lovelace"></n-input>
+            <div slot="footer">
+              <n-button data-n-close variant="outline">Cancelar</n-button>
+              <n-button data-n-close>Salvar</n-button>
+            </div>
+          </n-dialog>
+          <n-alert-dialog>
+            <n-button slot="trigger" variant="destructive">Excluir</n-button>
+            <span slot="title">Excluir projeto?</span>
+            <span slot="description">Essa ação não pode ser desfeita.</span>
+            <n-button slot="cancel" variant="outline">Cancelar</n-button>
+            <n-button slot="action" variant="destructive">Excluir</n-button>
+          </n-alert-dialog>
+          <n-sheet>
+            <n-button slot="trigger" variant="outline">Sheet</n-button>
+            <span slot="title">Filtros</span>
+            <span slot="description">Refine a lista.</span>
+            <n-button data-n-close>Aplicar</n-button>
+          </n-sheet>
+          <n-popover>
+            <n-button slot="trigger" variant="outline">Popover</n-button>
+            <p>Conteúdo flutuante, sem framework.</p>
+          </n-popover>
+          <n-tooltip text="Salvar alterações">
+            <n-button slot="trigger" variant="ghost">Tooltip</n-button>
+          </n-tooltip>
+          <n-dropdown>
+            <n-button slot="trigger" variant="outline">Menu</n-button>
+            <n-menu-label>Conta</n-menu-label>
+            <n-menu-item shortcut="⇧⌘P">Perfil</n-menu-item>
+            <n-menu-checkbox>Mostrar status</n-menu-checkbox>
+            <n-menu-separator></n-menu-separator>
+            <n-menu-sub label="Time">
+              <n-menu-item>Convidar</n-menu-item>
+              <n-menu-item>Sair</n-menu-item>
+            </n-menu-sub>
+          </n-dropdown>
+        </div>
+      </section>
+
+      <section>
+        <h2>Layout</h2>
+        <n-card>
+          <n-card-header>
+            <n-card-title>Plano Pro</n-card-title>
+            <n-card-description>Até 20 projetos.</n-card-description>
+          </n-card-header>
+          <n-card-content>
+            <n-progress value="64"></n-progress>
+          </n-card-content>
+          <n-card-footer>
+            <n-button size="sm">Atualizar</n-button>
+            <n-badge variant="secondary">Ativo</n-badge>
+          </n-card-footer>
+        </n-card>
+        <n-tabs value="conta">
+          <n-tab-list>
+            <n-tab value="conta">Conta</n-tab>
+            <n-tab value="senha">Senha</n-tab>
+          </n-tab-list>
+          <n-tab-panel value="conta">Dados da conta.</n-tab-panel>
+          <n-tab-panel value="senha">Troque a senha.</n-tab-panel>
+        </n-tabs>
+        <n-accordion>
+          <n-accordion-item open>
+            <span slot="heading">O que é agnóstico?</span>
+            São custom elements. Qualquer framework só escreve a tag.
+          </n-accordion-item>
+          <n-accordion-item>
+            <span slot="heading">Como tema o dark mode?</span>
+            Adicione a classe <code>dark</code> em um ancestral.
+          </n-accordion-item>
+        </n-accordion>
+        <n-separator></n-separator>
+        <n-table>
+          <table>
+            <caption>Equipe</caption>
+            <thead>
+              <tr><th>Nome</th><th>Papel</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Ada</td><td>Engenharia</td></tr>
+              <tr><td>Grace</td><td>Pesquisa</td></tr>
+            </tbody>
+          </table>
+        </n-table>
+        <n-scroll-area>
+          <p>Linha 1</p><p>Linha 2</p><p>Linha 3</p><p>Linha 4</p><p>Linha 5</p><p>Linha 6</p><p>Linha 7</p>
+        </n-scroll-area>
+      </section>
+
+      <section>
+        <h2>Feedback</h2>
+        <n-alert>
+          <span slot="title">Atualização disponível</span>
+          A versão 0.4 já está no registro.
+        </n-alert>
+        <n-alert variant="destructive">
+          <span slot="title">Falha ao publicar</span>
+          Verifique o token do registry.
+        </n-alert>
+        <div class="row">
+          <n-badge>Default</n-badge>
+          <n-badge variant="outline">Outline</n-badge>
+          <n-badge variant="destructive">Erro</n-badge>
+          <n-avatar fallback="NL"></n-avatar>
+          <n-avatar src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80" alt="Ada" fallback="AD"></n-avatar>
+        </div>
+        <n-skeleton style="width: 40%; height: 0.75rem"></n-skeleton>
+      </section>
+    </main>
+    <script>
+      document.getElementById('theme').addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+      });
+      document.getElementById('login').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        document.getElementById('form-out').textContent = JSON.stringify(Object.fromEntries(data.entries()));
+      });
+      document.getElementById('volume').addEventListener('n-input', (event) => {
+        document.getElementById('slider-out').textContent = String(event.detail);
+      });
+    </script>
+  </body>
+</html>

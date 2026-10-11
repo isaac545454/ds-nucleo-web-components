@@ -1,0 +1,67 @@
+:host {
+  display: block;
+  width: 100%;
+  color: hsl(var(--foreground));
+}
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border: 1px solid hsl(var(--input));
+  border-radius: calc(var(--radius) - 2px);
+  background: transparent;
+  color: inherit;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+  font: inherit;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+input {
+  height: 2.25rem;
+  padding: 0.25rem 0.75rem;
+}
+
+textarea {
+  min-height: 4.5rem;
+  padding: 0.5rem 0.75rem;
+  resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+
+input:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 1px hsl(var(--ring));
+}
+
+input:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+:host(:invalid) input,
+:host(:invalid) textarea {
+  border-color: hsl(var(--destructive));
+}
+
+input[type='file'] {
+  padding: 0.35rem 0.75rem;
+}
+
+input[type='file']::file-selector-button {
+  margin-right: 0.75rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}

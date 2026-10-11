@@ -1,0 +1,15 @@
+.panel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(32rem, calc(100vw - 2rem));
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  transform: translate(-50%, -50%);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}

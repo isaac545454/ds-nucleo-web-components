@@ -1,0 +1,59 @@
+.panel {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: hsl(var(--background));
+}
+
+.right {
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(24rem, 75vw);
+  border-width: 0 0 0 1px;
+  animation: n-sheet-right 0.28s ease;
+}
+
+.left {
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: min(24rem, 75vw);
+  border-width: 0 1px 0 0;
+  animation: n-sheet-left 0.28s ease;
+}
+
+.top {
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-width: 0 0 1px;
+  animation: n-sheet-top 0.28s ease;
+}
+
+.bottom {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-width: 1px 0 0;
+  animation: n-sheet-bottom 0.28s ease;
+}
+
+@keyframes n-sheet-right {
+  from { transform: translateX(100%); }
+  to { transform: none; }
+}
+@keyframes n-sheet-left {
+  from { transform: translateX(-100%); }
+  to { transform: none; }
+}
+@keyframes n-sheet-top {
+  from { transform: translateY(-100%); }
+  to { transform: none; }
+}
+@keyframes n-sheet-bottom {
+  from { transform: translateY(100%); }
+  to { transform: none; }
+}

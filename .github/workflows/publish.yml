@@ -28,8 +28,8 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
-      - run: pnpm run typecheck
       - run: pnpm run build
+      - run: pnpm run typecheck
 
       - name: Cortar versão a partir do Unreleased
         id: cut

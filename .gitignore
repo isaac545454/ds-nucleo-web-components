@@ -1,5 +1,8 @@
 node_modules/
 dist/
+loader/
+www/
+.stencil/
 storybook-static/
 *.tgz
 .DS_Store

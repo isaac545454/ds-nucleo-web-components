@@ -1,8 +1,8 @@
 # Nucleus
 
-Design system interno baseado em [shadcn/ui](https://ui.shadcn.com), distribuído como **um único pacote versionado**.
+Design system agnóstico. Os componentes são custom elements compilados com [Stencil](https://stenciljs.com): o mesmo `<n-button>` funciona em HTML, React, Vue, Angular, Svelte ou qualquer outro ambiente.
 
-27 componentes, tokens de tema light/dark e Storybook com documentação viva.
+Os tokens continuam os do tema zinc (light/dark) e atravessam o Shadow DOM via CSS variables.
 
 ## Instalação
 
@@ -10,111 +10,87 @@ Design system interno baseado em [shadcn/ui](https://ui.shadcn.com), distribuíd
 npm install @isaac545454/nucleus
 ```
 
-## Setup no projeto consumidor
-
-1. Importe os estilos (uma vez, no entry da app):
+Registre os componentes uma vez e importe os tokens. As variáveis ficam no documento e atravessam o Shadow DOM:
 
 ```ts
-import "@isaac545454/nucleus/styles.css";
+import '@isaac545454/nucleus/styles.css';
+import { defineCustomElements } from '@isaac545454/nucleus/loader';
+
+defineCustomElements();
 ```
 
-2. Se a app também usa Tailwind, adicione o preset para compartilhar os mesmos tokens:
+HTML sem bundler:
 
-```js
-// tailwind.config.js
-import nucleusPreset from "@isaac545454/nucleus/tailwind-preset";
+```html
+<link rel="stylesheet" href="https://unpkg.com/@isaac545454/nucleus/dist/styles.css" />
+<script type="module" src="https://unpkg.com/@isaac545454/nucleus/dist/nucleus/nucleus.esm.js"></script>
+```
 
-export default {
-  presets: [nucleusPreset],
-  content: [
-    "./src/**/*.{ts,tsx}",
-    "./node_modules/@isaac545454/nucleus/dist/**/*.js",
-  ],
-};
+Para importar componente a componente (cada módulo se registra sozinho):
+
+```ts
+import '@isaac545454/nucleus/styles.css';
+import '@isaac545454/nucleus/components/n-button.js';
+import '@isaac545454/nucleus/components/n-input.js';
+```
+
+## Tema
+
+Sobrescreva as variáveis em `:root`. A classe `dark` em qualquer ancestral troca o tema, porque as variáveis são herdadas pelo Shadow DOM.
+
+```css
+:root {
+  --primary: 240 5.9% 10%;
+  --radius: 0.5rem;
+}
 ```
 
 ## Uso
 
-```tsx
-import { Button, Input, Label, Dialog, DialogContent, DialogTrigger } from "@isaac545454/nucleus";
-
-export function LoginDialog() {
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button>Entrar</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <Label htmlFor="email">E-mail</Label>
-        <Input id="email" type="email" placeholder="voce@empresa.com" />
-        <Button type="submit">Confirmar</Button>
-      </DialogContent>
-    </Dialog>
-  );
-}
+```html
+<n-dialog>
+  <n-button slot="trigger">Entrar</n-button>
+  <span slot="title">Acesso</span>
+  <span slot="description">Use o e-mail da empresa.</span>
+  <n-label for="email">E-mail</n-label>
+  <n-input id="email" name="email" type="email" placeholder="voce@empresa.com"></n-input>
+  <div slot="footer">
+    <n-button data-n-close variant="outline">Cancelar</n-button>
+    <n-button type="submit">Confirmar</n-button>
+  </div>
+</n-dialog>
 ```
+
+Controles de formulário (`n-input`, `n-textarea`, `n-checkbox`, `n-switch`, `n-radio-group`, `n-select`, `n-slider` e `n-button`) participam do `<form>` nativo. `n-button type="submit"` envia o formulário ancestral.
+
+Eventos sobem atravessando o Shadow DOM:
+
+| Evento | Quando |
+|---|---|
+| `n-input` | valor muda enquanto o usuário edita |
+| `n-change` | valor é confirmado |
+| `n-open` / `n-close` | diálogo abre ou fecha |
+| `n-confirm` / `n-cancel` | alerta confirma ou cancela |
+
+React 19 escuta esses eventos no elemento. Em React 18, use `addEventListener` ou uma ref.
 
 ## Componentes
 
-| Categoria | Componentes |
+| Categoria | Tags |
 |---|---|
-| Overlays | Dialog, AlertDialog, Sheet, Popover, Tooltip, DropdownMenu |
-| Forms | Button, Input, Textarea, Label, Checkbox, RadioGroup, Switch, Select, Toggle, Slider |
-| Layout | Card, Tabs, Accordion, Separator, ScrollArea, Table |
-| Feedback | Alert, Badge, Avatar, Progress, Skeleton |
+| Overlays | `n-dialog`, `n-alert-dialog`, `n-sheet`, `n-popover`, `n-tooltip`, `n-dropdown` |
+| Menu | `n-menu-item`, `n-menu-checkbox`, `n-menu-radio-group`, `n-menu-radio`, `n-menu-label`, `n-menu-separator`, `n-menu-sub` |
+| Forms | `n-button`, `n-input`, `n-textarea`, `n-label`, `n-checkbox`, `n-radio-group`, `n-radio`, `n-switch`, `n-select`, `n-option`, `n-toggle`, `n-slider` |
+| Layout | `n-card`, `n-tabs`, `n-accordion`, `n-separator`, `n-scroll-area`, `n-table` |
+| Feedback | `n-alert`, `n-badge`, `n-avatar`, `n-progress`, `n-skeleton` |
 
-## Storybook
-
-```bash
-npm run storybook          # dev server em http://localhost:6006
-npm run build-storybook    # build estático em storybook-static/
-```
-
-## Adicionando um novo componente
-
-A lib mantém o `components.json`, então o CLI do shadcn funciona dentro dela:
-
-```bash
-npx shadcn@latest add calendar
-```
-
-Depois exporte no barrel:
-
-```ts
-// src/index.ts
-export * from "./components/ui/calendar";
-```
-
-E crie `src/components/ui/calendar.stories.tsx`.
-
-## Versionamento e release
-
-Cada PR adiciona uma entrada em `## [Unreleased]` no `CHANGELOG.md`. O CI recusa o PR sem uma entrada nova nessa seção.
-
-No merge em `master`, o workflow:
-
-1. Lê os commits desde a última tag (`feat` = minor, `fix` = patch, breaking = major).
-2. Move o `Unreleased` para `## [x.y.z] - data`, sobe `package.json` e commita.
-3. Publica no GitHub Packages e abre a GitHub Release com essas notas.
-
-| Mudança | Versão |
-|---|---|
-| Fix em componente existente | patch (0.2.1) |
-| Novo componente / variant (`feat`) | minor (0.3.0) |
-| Breaking change (`feat!` ou `BREAKING CHANGE`) | major (1.0.0) |
+`n-button` aceita `variant` (`default`, `destructive`, `outline`, `secondary`, `ghost`, `link`) e `size` (`default`, `sm`, `lg`, `icon`).
 
 ## Desenvolvimento
 
 ```bash
 pnpm install
-pnpm run typecheck
-pnpm run build      # gera dist/ (ESM + types + CSS)
-pnpm run storybook
+pnpm start          # galeria em http://localhost:3333
+pnpm test
+pnpm build          # dist/ + loader/
 ```
-
-> **Rede corporativa**: se `npx shadcn` falhar com `unable to get local issuer certificate`,
-> exporte a CA da empresa e aponte o Node para ela:
-> ```bash
-> security find-certificate -a -p /Library/Keychains/System.keychain > ~/.certs/corp-ca.pem
-> export NODE_EXTRA_CA_CERTS=~/.certs/corp-ca.pem
-> ```

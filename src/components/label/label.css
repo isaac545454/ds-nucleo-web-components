@@ -1,0 +1,14 @@
+:host {
+  display: inline-block;
+  color: hsl(var(--foreground));
+}
+
+label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+}

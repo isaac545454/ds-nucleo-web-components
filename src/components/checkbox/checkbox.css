@@ -1,0 +1,42 @@
+:host {
+  display: inline-flex;
+  vertical-align: middle;
+  color: hsl(var(--primary));
+}
+
+button {
+  display: grid;
+  place-content: center;
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid hsl(var(--primary));
+  border-radius: calc(var(--radius) - 4px);
+  background: transparent;
+  color: hsl(var(--primary-foreground));
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 1px hsl(var(--ring));
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+:host([checked]) button {
+  background: hsl(var(--primary));
+}
+
+.mark {
+  opacity: 0;
+}
+
+:host([checked]) .mark {
+  opacity: 1;
+}
