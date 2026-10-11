@@ -7,6 +7,8 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-10-11
+
 ### Fixed
 
 - O `repository` do pacote aponta para `https://github.com/isaac545454/ds-nucleo-web-components.git`. Com `git+https`, o GitHub Packages não vinculava o pacote a este repositório e o `GITHUB_TOKEN` recebia `403 write_package`.
