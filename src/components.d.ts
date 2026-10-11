@@ -365,6 +365,18 @@ export namespace Components {
          */
         "value": number;
     }
+    interface NSpinner {
+        /**
+          * Text announced by assistive technology.
+          * @default 'Carregando'
+         */
+        "label": string;
+        /**
+          * Indicator size.
+          * @default 'default'
+         */
+        "size": 'sm' | 'default' | 'lg';
+    }
     interface NSwitch {
         /**
           * @default false
@@ -947,6 +959,12 @@ declare global {
         prototype: HTMLNSliderElement;
         new (): HTMLNSliderElement;
     };
+    interface HTMLNSpinnerElement extends Components.NSpinner, HTMLStencilElement {
+    }
+    var HTMLNSpinnerElement: {
+        prototype: HTMLNSpinnerElement;
+        new (): HTMLNSpinnerElement;
+    };
     interface HTMLNSwitchElementEventMap {
         "n-change": boolean;
     }
@@ -1095,6 +1113,7 @@ declare global {
         "n-sheet": HTMLNSheetElement;
         "n-skeleton": HTMLNSkeletonElement;
         "n-slider": HTMLNSliderElement;
+        "n-spinner": HTMLNSpinnerElement;
         "n-switch": HTMLNSwitchElement;
         "n-tab": HTMLNTabElement;
         "n-tab-list": HTMLNTabListElement;
@@ -1501,6 +1520,18 @@ declare namespace LocalJSX {
          */
         "value"?: number;
     }
+    interface NSpinner {
+        /**
+          * Text announced by assistive technology.
+          * @default 'Carregando'
+         */
+        "label"?: string;
+        /**
+          * Indicator size.
+          * @default 'default'
+         */
+        "size"?: 'sm' | 'default' | 'lg';
+    }
     interface NSwitch {
         /**
           * @default false
@@ -1764,6 +1795,10 @@ declare namespace LocalJSX {
         "disabled": boolean;
         "name": string;
     }
+    interface NSpinnerAttributes {
+        "label": string;
+        "size": 'sm' | 'default' | 'lg';
+    }
     interface NSwitchAttributes {
         "checked": boolean;
         "defaultChecked": boolean;
@@ -1843,6 +1878,7 @@ declare namespace LocalJSX {
         "n-sheet": Omit<NSheet, keyof NSheetAttributes> & { [K in keyof NSheet & keyof NSheetAttributes]?: NSheet[K] } & { [K in keyof NSheet & keyof NSheetAttributes as `attr:${K}`]?: NSheetAttributes[K] } & { [K in keyof NSheet & keyof NSheetAttributes as `prop:${K}`]?: NSheet[K] };
         "n-skeleton": NSkeleton;
         "n-slider": Omit<NSlider, keyof NSliderAttributes> & { [K in keyof NSlider & keyof NSliderAttributes]?: NSlider[K] } & { [K in keyof NSlider & keyof NSliderAttributes as `attr:${K}`]?: NSliderAttributes[K] } & { [K in keyof NSlider & keyof NSliderAttributes as `prop:${K}`]?: NSlider[K] };
+        "n-spinner": Omit<NSpinner, keyof NSpinnerAttributes> & { [K in keyof NSpinner & keyof NSpinnerAttributes]?: NSpinner[K] } & { [K in keyof NSpinner & keyof NSpinnerAttributes as `attr:${K}`]?: NSpinnerAttributes[K] } & { [K in keyof NSpinner & keyof NSpinnerAttributes as `prop:${K}`]?: NSpinner[K] };
         "n-switch": Omit<NSwitch, keyof NSwitchAttributes> & { [K in keyof NSwitch & keyof NSwitchAttributes]?: NSwitch[K] } & { [K in keyof NSwitch & keyof NSwitchAttributes as `attr:${K}`]?: NSwitchAttributes[K] } & { [K in keyof NSwitch & keyof NSwitchAttributes as `prop:${K}`]?: NSwitch[K] };
         "n-tab": Omit<NTab, keyof NTabAttributes> & { [K in keyof NTab & keyof NTabAttributes]?: NTab[K] } & { [K in keyof NTab & keyof NTabAttributes as `attr:${K}`]?: NTabAttributes[K] } & { [K in keyof NTab & keyof NTabAttributes as `prop:${K}`]?: NTab[K] } & OneOf<"value", NTab["value"], NTabAttributes["value"]>;
         "n-tab-list": NTabList;
@@ -1895,6 +1931,7 @@ declare module "@stencil/core" {
             "n-sheet": LocalJSX.IntrinsicElements["n-sheet"] & JSXBase.HTMLAttributes<HTMLNSheetElement>;
             "n-skeleton": LocalJSX.IntrinsicElements["n-skeleton"] & JSXBase.HTMLAttributes<HTMLNSkeletonElement>;
             "n-slider": LocalJSX.IntrinsicElements["n-slider"] & JSXBase.HTMLAttributes<HTMLNSliderElement>;
+            "n-spinner": LocalJSX.IntrinsicElements["n-spinner"] & JSXBase.HTMLAttributes<HTMLNSpinnerElement>;
             "n-switch": LocalJSX.IntrinsicElements["n-switch"] & JSXBase.HTMLAttributes<HTMLNSwitchElement>;
             "n-tab": LocalJSX.IntrinsicElements["n-tab"] & JSXBase.HTMLAttributes<HTMLNTabElement>;
             "n-tab-list": LocalJSX.IntrinsicElements["n-tab-list"] & JSXBase.HTMLAttributes<HTMLNTabListElement>;

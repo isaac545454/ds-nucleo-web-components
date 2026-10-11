@@ -2,6 +2,7 @@ import { newSpecPage } from '@stencil/core/testing';
 
 import { Button } from './button/button';
 import { Badge } from './badge/badge';
+import { Spinner } from './spinner/spinner';
 import { Checkbox } from './checkbox/checkbox';
 import { Input } from './input/input';
 import { Tab } from './tabs/tab';
@@ -43,6 +44,17 @@ describe('nucleus', () => {
     await page.waitForChanges();
     expect(page.root?.hasAttribute('checked')).toBe(true);
     expect(calls).toEqual([true]);
+  });
+
+  it('renders a spinner with an accessible label', async () => {
+    const page = await newSpecPage({
+      components: [Spinner],
+      html: `<n-spinner label="Salvando" size="sm"></n-spinner>`,
+    });
+    expect(page.root?.getAttribute('role')).toBe('status');
+    expect(page.root?.getAttribute('aria-label')).toBe('Salvando');
+    expect(page.root?.getAttribute('size')).toBe('sm');
+    expect(page.root?.shadowRoot?.querySelector('svg')).not.toBeNull();
   });
 
   it('renders a badge', async () => {

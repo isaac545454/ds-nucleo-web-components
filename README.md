@@ -82,7 +82,7 @@ React 19 escuta esses eventos no elemento. Em React 18, use `addEventListener` o
 | Menu | `n-menu-item`, `n-menu-checkbox`, `n-menu-radio-group`, `n-menu-radio`, `n-menu-label`, `n-menu-separator`, `n-menu-sub` |
 | Forms | `n-button`, `n-input`, `n-textarea`, `n-label`, `n-checkbox`, `n-radio-group`, `n-radio`, `n-switch`, `n-select`, `n-option`, `n-toggle`, `n-slider` |
 | Layout | `n-card`, `n-tabs`, `n-accordion`, `n-separator`, `n-scroll-area`, `n-table` |
-| Feedback | `n-alert`, `n-badge`, `n-avatar`, `n-progress`, `n-skeleton` |
+| Feedback | `n-alert`, `n-badge`, `n-avatar`, `n-progress`, `n-skeleton`, `n-spinner` |
 
 `n-button` aceita `variant` (`default`, `destructive`, `outline`, `secondary`, `ghost`, `link`) e `size` (`default`, `sm`, `lg`, `icon`).
 
@@ -91,6 +91,7 @@ React 19 escuta esses eventos no elemento. Em React 18, use `addEventListener` o
 ```bash
 pnpm install
 pnpm start          # galeria em http://localhost:3333
+pnpm storybook      # catálogo em http://localhost:6006
 pnpm test
 pnpm build          # dist/ + loader/
 ```

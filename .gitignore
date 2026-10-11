@@ -4,6 +4,9 @@ loader/
 www/
 .stencil/
 storybook-static/
+dist-vite/
+custom-elements.json
+custom-elements.d.ts
 *.tgz
 .DS_Store
 coverage

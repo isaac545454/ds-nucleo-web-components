@@ -48,13 +48,21 @@
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --ci && vitest run",
     "test:spec": "stencil test --spec --ci",
-    "typecheck": "tsc --noEmit --pretty false"
+    "typecheck": "tsc --noEmit --pretty false",
+    "storybook": "pnpm build && concurrently -k -n stencil,storybook \"stencil build --watch\" \"storybook dev -p 6006\"",
+    "build-storybook": "pnpm build && storybook build"
   },
   "devDependencies": {
     "@stencil/core": "^4.38.3",
+    "@storybook/addon-a11y": "10.6.1",
+    "@storybook/addon-themes": "10.6.1",
+    "@storybook/web-components-vite": "10.6.1",
     "@types/jest": "^29.5.14",
+    "concurrently": "10.0.6",
     "jest": "^29.7.0",
     "jest-cli": "^29.7.0",
+    "lit": "3.3.3",
+    "storybook": "10.6.1",
     "typescript": "^5.5.4",
     "vitest": "^3.2.4"
   }
