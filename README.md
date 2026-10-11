@@ -7,14 +7,14 @@ Os tokens continuam os do tema zinc (light/dark) e atravessam o Shadow DOM via C
 ## Instalação
 
 ```bash
-npm install @isaac545454/nucleus
+npm install @isaac545454/nucleo
 ```
 
 Registre os componentes uma vez e importe os tokens. As variáveis ficam no documento e atravessam o Shadow DOM:
 
 ```ts
-import '@isaac545454/nucleus/styles.css';
-import { defineCustomElements } from '@isaac545454/nucleus/loader';
+import '@isaac545454/nucleo/styles.css';
+import { defineCustomElements } from '@isaac545454/nucleo/loader';
 
 defineCustomElements();
 ```
@@ -22,16 +22,16 @@ defineCustomElements();
 HTML sem bundler:
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@isaac545454/nucleus/dist/styles.css" />
-<script type="module" src="https://unpkg.com/@isaac545454/nucleus/dist/nucleus/nucleus.esm.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@isaac545454/nucleo/dist/styles.css" />
+<script type="module" src="https://unpkg.com/@isaac545454/nucleo/dist/nucleus/nucleus.esm.js"></script>
 ```
 
 Para importar componente a componente (cada módulo se registra sozinho):
 
 ```ts
-import '@isaac545454/nucleus/styles.css';
-import '@isaac545454/nucleus/components/n-button.js';
-import '@isaac545454/nucleus/components/n-input.js';
+import '@isaac545454/nucleo/styles.css';
+import '@isaac545454/nucleo/components/n-button.js';
+import '@isaac545454/nucleo/components/n-input.js';
 ```
 
 ## Tema

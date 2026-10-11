@@ -7,6 +7,10 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Changed
+
+- O pacote passa a se chamar `@isaac545454/nucleo`. `@isaac545454/nucleus` continua ligado ao repositório `ds-nucleo`, e o `GITHUB_TOKEN` deste repositório não consegue publicar nele.
+
 ## [0.7.0] - 2026-10-11
 
 ### Fixed
