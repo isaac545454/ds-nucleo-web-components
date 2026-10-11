@@ -10,6 +10,7 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 ### Added
 
 - Storybook 10 (`@storybook/web-components-vite`) com stories dos componentes, addon de acessibilidade e toggle de tema light/dark.
+- Componente `Spinner` (`n-spinner`) para indicar carregamento, com tamanhos `sm`, `default` e `lg`.
 
 ### Changed
 
