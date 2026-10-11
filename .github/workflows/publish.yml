@@ -12,6 +12,9 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,6 +29,7 @@ jobs:
           cache: pnpm
           registry-url: https://npm.pkg.github.com
           scope: '@isaac545454'
+          always-auth: true
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
@@ -59,8 +63,12 @@ jobs:
             exit 0
           fi
 
-          if ! npm view "${name}@${version}" version --registry https://npm.pkg.github.com; then
-            pnpm publish --no-git-checks --access public
+          echo "Publicando ${name}@${version}"
+          published="$(npm view "$name" versions --json --registry https://npm.pkg.github.com 2>/dev/null || true)"
+          if printf '%s' "$published" | grep -q "\"${version}\""; then
+            echo "Pacote ${name}@${version} já está no registry."
+          else
+            npm publish --access public
           fi
 
           notes="$(node scripts/release-notes.mjs "$version")"
