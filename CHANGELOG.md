@@ -7,6 +7,8 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-10-11
+
 ### Added
 
 - Storybook 10 (`@storybook/web-components-vite`) com stories dos componentes, addon de acessibilidade e toggle de tema light/dark.
